@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 void print2D(float* arr, int ROW, int COLUMN)
 {
@@ -19,6 +18,5 @@ void print1D(float* arr, int size)
     {
         printf("%f ", arr[i]);
     }
-    printf("\n"); 
 }
 

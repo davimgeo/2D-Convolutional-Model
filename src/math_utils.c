@@ -1,4 +1,5 @@
 #include "../include/math_utils.h"
+#include "../include/print.h"
 #include <stdio.h>
 
 void elementWiseArrayMultiplication(int ROW, int COLUMN, float A[ROW][COLUMN], float B[ROW][COLUMN],float AB[ROW][COLUMN])
@@ -34,5 +35,20 @@ void reflectivityMatrix(int ROW, int COLUMN, float arr[ROW][COLUMN])
 
     arr[i][COLUMN - 1] = 0.0f;
   }
+}
+
+static void convolution1D(float arr_1[], float arr_2[], int m, int n, float yk[])
+{
+  for (int i = 0; i < m; ++i) {
+    for (int j = 0; j < n; ++j) {
+      yk[i + j] += arr_1[i] * arr_2[j];
+    }
+  }
+}
+
+void applyConvoInto2DArray(int ROW, int COLUMN, float input_signal[ROW][COLUMN], float filter[], 
+                           int filter_size, float output[ROW][COLUMN])
+{
+  // TODO
 }
 

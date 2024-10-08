@@ -2,13 +2,19 @@
 #include "include/bin_file.h"
 #include "include/print.h"
 #include "include/math_utils.h"
+#include "include/wavelet.h"
 
 #define ROW 648
 #define COLUMN 1150
 
+#define NT 501
+#define DT 0.001
+#define FMAX 25
+
 float arr_vp[ROW][COLUMN];
 float arr_rho[ROW][COLUMN]; 
 float arr_result[ROW][COLUMN];
+float convolved_arr[ROW][COLUMN];
 
 int main(int argc, char *argv[])
 {
@@ -19,12 +25,15 @@ int main(int argc, char *argv[])
   read2D(PATH_RHO, (float*)arr_rho, sizeof(float), ROW, COLUMN);
 
   elementWiseArrayMultiplication(ROW, COLUMN, arr_vp, arr_rho, arr_result);
-
   reflectivityMatrix(ROW, COLUMN, arr_result);
 
-  write2D("data/test.bin", (float*)arr_result, sizeof(float), ROW, COLUMN);
+  float ricker_arr[NT];
 
-  /*print2D((float*)arr_result, ROW, COLUMN);*/
+  ricker((float*)ricker_arr, NT, DT, FMAX);
+
+  /*applyConvoInto2DArray(ROW, COLUMN, arr_result, ricker_arr, NT, convolved_arr);*/
+
+  /*write2D("data/conv.bin", (float*)convolved_arr, sizeof(float), ROW, COLUMN);*/
 
   return 0;
 }

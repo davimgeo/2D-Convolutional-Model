@@ -21,7 +21,6 @@
  *          {4, 5, 6},
  *          {7, 8, 9}
  * };
- * int type = sizeof(int);
  * 
  * print2D(arr, type, ROW, COLUMN);
 */
@@ -40,7 +39,6 @@ void print2D(float* arr, int ROW, int COLUMN);
  * 
  * @example
  * int arr[] = {1, 2, 3};
- * int type = sizeof(int);
  * int size = sizeof(arr) / sizeof(arr[0]);
  * 
  * print1D(arr, type,);
