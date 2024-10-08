@@ -16,6 +16,19 @@ fig, ax = plt.subplots(1, 2, figsize=(10, 8))
 
 ax[0].imshow(model)
 ax[1].imshow(model_python)
-# plt.plot(model)
 
 plt.show()
+
+n, q = 0, 0
+for i in range(nz):
+    for j in range(nx):
+        if model[i][j] > 0.5:
+            print(f"{model[i][j]} in index {(n, q)}")
+
+        q += 1
+    n += 1
+
+plt.plot(model[0][:])
+
+plt.show()
+

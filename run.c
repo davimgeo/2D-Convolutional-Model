@@ -1,35 +1,30 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "include/bin_file.h"
-#include "include/wavelet.h"
 #include "include/print.h"
-#include "include/matrix_multiplication.h"
+#include "include/math_utils.h"
 
 #define ROW 648
 #define COLUMN 1150
 
-#define NT 501
-#define DT 0.001
-#define FMAX 25
+float arr_vp[ROW][COLUMN];
+float arr_rho[ROW][COLUMN]; 
+float arr_result[ROW][COLUMN];
 
 int main(int argc, char *argv[])
 {
   const char* PATH_VP = "data/model_vp_2d.bin";
   const char* PATH_RHO = "data/model_rho_2d.bin";
 
-  float* arr_vp = (float*)malloc(ROW * COLUMN * sizeof(float));
-  float* arr_rho = (float*)malloc(ROW * COLUMN * sizeof(float));
-  float* arr_result = (float*)malloc(ROW * COLUMN * sizeof(float));
+  read2D(PATH_VP, (float*)arr_vp, sizeof(float), ROW, COLUMN);
+  read2D(PATH_RHO, (float*)arr_rho, sizeof(float), ROW, COLUMN);
 
-  read2D(PATH_VP, arr_vp, sizeof(float), ROW, COLUMN);
-  read2D(PATH_RHO, arr_rho, sizeof(float), ROW, COLUMN);
+  elementWiseArrayMultiplication(ROW, COLUMN, arr_vp, arr_rho, arr_result);
 
-  elementWiseArrayMultiplication(arr_vp, arr_rho, arr_result, ROW, COLUMN);
+  reflectivityMatrix(ROW, COLUMN, arr_result);
 
-  free(arr_vp);
-  free(arr_rho);
-  free(arr_result);
+  write2D("data/test.bin", (float*)arr_result, sizeof(float), ROW, COLUMN);
+
+  /*print2D((float*)arr_result, ROW, COLUMN);*/
 
   return 0;
 }

@@ -5,7 +5,7 @@
 #define BINARY_WRITE "wb"
 #define BINARY_READ "rb"
 
-void write2D(const char* FILE_PATH, void* arr, size_t type, int row, int column) 
+void write2D(const char* FILE_PATH, float* arr, size_t type, int row, int column) 
 {
     FILE* bin_data = fopen(FILE_PATH, BINARY_WRITE); 
     if (bin_data == NULL) 
@@ -19,7 +19,7 @@ void write2D(const char* FILE_PATH, void* arr, size_t type, int row, int column)
     fclose(bin_data);   
 }
 
-void read2D(const char* FILE_PATH, void* arr, size_t type, int row, int column)
+void read2D(const char* FILE_PATH, float* arr, size_t type, int row, int column)
 {
     FILE* bin_data = fopen(FILE_PATH, BINARY_READ);
     if (bin_data == NULL) 
@@ -33,20 +33,22 @@ void read2D(const char* FILE_PATH, void* arr, size_t type, int row, int column)
     fclose(bin_data);  
 }
 
-void write1D(const char* FILE_PATH, void* arr, size_t type, int size) 
+void write1D(const char* FILE_PATH, float* arr, size_t type, int size) 
 {
     FILE* bin_data = fopen(FILE_PATH, BINARY_WRITE); 
-    if (bin_data == NULL) {
+    if (bin_data == NULL) 
+    {
         printf("Could not open the file for writing!\n");
         exit(-1);
     }
 
+    // Escrevendo o array 1D no arquivo
     fwrite(arr, type, size, bin_data);  
 
     fclose(bin_data);   
 }
 
-void read1D(const char* FILE_PATH, void* arr, size_t type, int size) 
+void read1D(const char* FILE_PATH, float* arr, size_t type, int size) 
 {
     FILE* bin_data = fopen(FILE_PATH, BINARY_READ);
     if (bin_data == NULL) 
@@ -58,6 +60,4 @@ void read1D(const char* FILE_PATH, void* arr, size_t type, int size)
     fread(arr, type, size, bin_data); 
     fclose(bin_data);  
 }
-
-
 
