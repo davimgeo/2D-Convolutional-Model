@@ -31,8 +31,6 @@ int main(int argc, char *argv[])
 
   ricker((float*)ricker_arr, NT, DT, FMAX);
 
-  /*applyConvoInto2DArray(ROW, COLUMN, arr_result, ricker_arr, NT, convolved_arr);*/
-
   /*write2D("data/conv.bin", (float*)convolved_arr, sizeof(float), ROW, COLUMN);*/
 
   return 0;

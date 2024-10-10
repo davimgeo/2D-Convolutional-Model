@@ -14,14 +14,17 @@ model_python = np.fromfile(path + "test.bin", dtype=np.float32, count=nx*nz).res
 
 fig, ax = plt.subplots(1, 2, figsize=(10, 8))
 
-ax[0].imshow(model)
+ax[0].imshow(model, cmap="grey")
 ax[1].imshow(model_python)
 
 plt.show()
 
-# wavelet = np.fromfile(path + "wavelet.bin", dtype=np.float32)
-#
-# plt.plot(wavelet)
-#
-# plt.show()
+wavelet = np.fromfile(path + "wavelet.bin", dtype=np.float32)
 
+arr = model_python
+for i in range(nx):
+    arr[:, i] = np.convolve(arr[:, i], wavelet, mode="same")
+
+plt.imshow(arr, cmap="grey")
+
+plt.show()

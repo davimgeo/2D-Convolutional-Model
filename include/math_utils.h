@@ -5,8 +5,8 @@ void elementWiseArrayMultiplication(int ROW, int COLUMN, float A[ROW][COLUMN], f
 
 void reflectivityMatrix(int ROW, int COLUMN, float arr[ROW][COLUMN]);
 
+void convolution1D(float arr_1[], float arr_2[], int m, int n, float yk[m]);
 
-void applyConvoInto2DArray(int ROW, int COLUMN, float input_signal[ROW][COLUMN], float filter[], 
-                           int filter_size, float output[ROW][COLUMN]);
+void initializeArray(int ROW, int COLUMN, float arr[ROW][COLUMN]);
 
 #endif // !MATRIX_MULTIPLICATION_H

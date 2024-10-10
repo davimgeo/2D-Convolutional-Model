@@ -37,8 +37,12 @@ void reflectivityMatrix(int ROW, int COLUMN, float arr[ROW][COLUMN])
   }
 }
 
-static void convolution1D(float arr_1[], float arr_2[], int m, int n, float yk[])
+void convolution1D(float arr_1[], float arr_2[], int m, int n, float yk[])
 {
+  for (int i = 0; i < m + n - 1; ++i) {
+    yk[i] = 0.0f; 
+  }
+
   for (int i = 0; i < m; ++i) {
     for (int j = 0; j < n; ++j) {
       yk[i + j] += arr_1[i] * arr_2[j];
@@ -46,9 +50,13 @@ static void convolution1D(float arr_1[], float arr_2[], int m, int n, float yk[]
   }
 }
 
-void applyConvoInto2DArray(int ROW, int COLUMN, float input_signal[ROW][COLUMN], float filter[], 
-                           int filter_size, float output[ROW][COLUMN])
+void initializeArray(int ROW, int COLUMN, float arr[ROW][COLUMN])
 {
-  // TODO
+  for (int i = 0; i < ROW; ++i) 
+  {
+    for (int j = 0; j < COLUMN; ++j) 
+    {
+      arr[i][j] = 0.0f;
+    }
+  }
 }
-
