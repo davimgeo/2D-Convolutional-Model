@@ -24,14 +24,19 @@ int main(int argc, char *argv[])
   read2D(PATH_VP, (float*)arr_vp, sizeof(float), ROW, COLUMN);
   read2D(PATH_RHO, (float*)arr_rho, sizeof(float), ROW, COLUMN);
 
+  initializeArray2D(ROW, COLUMN, arr_result);
+  initializeArray2D(ROW, COLUMN, convolved_arr);
+
   elementWiseArrayMultiplication(ROW, COLUMN, arr_vp, arr_rho, arr_result);
   reflectivityMatrix(ROW, COLUMN, arr_result);
 
   float ricker_arr[NT];
-
+  initializeArray1D(NT, ricker_arr);
   ricker((float*)ricker_arr, NT, DT, FMAX);
 
-  /*write2D("data/conv.bin", (float*)convolved_arr, sizeof(float), ROW, COLUMN);*/
+  convolution2D(ROW, COLUMN, arr_result, ricker_arr, NT, convolved_arr);
+
+  write2D("data/conv.bin", (float*)convolved_arr, sizeof(float), ROW, COLUMN);
 
   return 0;
 }
